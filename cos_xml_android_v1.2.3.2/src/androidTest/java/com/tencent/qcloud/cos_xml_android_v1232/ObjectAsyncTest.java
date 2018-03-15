@@ -522,7 +522,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
         headObjectTest();
         optionObjectTest();
         putObjectACLTest();
-        getObjectACLTest();
+        //getObjectACLTest();
         getObjectTest();
         deleteObjectTest();
         deleteMulitObjectTest();

@@ -276,7 +276,7 @@ public class ObjectTest extends AndroidTestCase {
             headObjectTest();
             optionObjectTest();
             putObjectACLTest();
-            getObjectACLTest();
+  //          getObjectACLTest();
             getObjectTest();
             deleteObjectTest();
             deleteMulitObjectTest();

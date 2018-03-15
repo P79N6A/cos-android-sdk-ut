@@ -1,5 +1,6 @@
 package com.tencent.qcloud.cos_xml_android_v12;
 
+import android.content.Context;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
@@ -54,6 +55,11 @@ public class BucketTest extends AndroidTestCase {
     private static final String TAG = "Unit_Test";
 
     private String bucket;
+
+    @Override
+    public Context getContext() {
+        return super.getContext();
+    }
 
     //put bucket
     public void putBucketTest() throws CosXmlServiceException, CosXmlClientException {
@@ -195,6 +201,8 @@ public class BucketTest extends AndroidTestCase {
     @Test
     public void test() throws CosXmlServiceException, CosXmlClientException{
         QBaseServe.init(getContext());
+        Log.d("UnitTest", getContext().getExternalCacheDir().getPath());
+
 
         bucket = "android" + System.currentTimeMillis()/1000;
 
