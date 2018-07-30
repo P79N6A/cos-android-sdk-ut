@@ -1,6 +1,5 @@
 package com.tencent.qcloud.cos_xml_android_v123;
 
-import android.os.Environment;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
@@ -26,8 +25,6 @@ import com.tencent.cos.xml.model.object.HeadObjectRequest;
 import com.tencent.cos.xml.model.object.HeadObjectResult;
 import com.tencent.cos.xml.model.object.InitMultipartUploadRequest;
 import com.tencent.cos.xml.model.object.InitMultipartUploadResult;
-import com.tencent.cos.xml.model.object.ListPartsRequest;
-import com.tencent.cos.xml.model.object.ListPartsResult;
 import com.tencent.cos.xml.model.object.OptionObjectRequest;
 import com.tencent.cos.xml.model.object.OptionObjectResult;
 import com.tencent.cos.xml.model.object.PutObjectACLRequest;
@@ -61,6 +58,7 @@ public class ObjectTest extends AndroidTestCase {
         cosPath = "putobject.txt";
         String srcPath = QBaseServe.createFile(1024 * 1024);
         PutObjectRequest request = new PutObjectRequest(bucket, cosPath, srcPath);
+        request.setSign(600);
         PutObjectResult result = QBaseServe.cosXmlClient.putObject(request);
         Log.d(TAG, result.printHeaders() + "|" + result.printBody());
         QBaseServe.delete(srcPath);
@@ -68,6 +66,7 @@ public class ObjectTest extends AndroidTestCase {
 
     public void headObjectTest() throws CosXmlServiceException, CosXmlClientException {
         HeadObjectRequest request = new HeadObjectRequest(bucket, cosPath);
+        request.setSign(600);
         HeadObjectResult result = QBaseServe.cosXmlClient.headObject(request);
         Log.d(TAG, result.printHeaders() + "|" + result.printBody());
     }
@@ -76,6 +75,7 @@ public class ObjectTest extends AndroidTestCase {
         String origin = "http://cloud.tencent.com";
         String method = "PUT";
         OptionObjectRequest request = new OptionObjectRequest(bucket, cosPath, origin, method);
+        request.setSign(600);
         OptionObjectResult result = QBaseServe.cosXmlClient.optionObject(request);
         Log.d(TAG, result.printHeaders() + "|" + result.printBody());
     }
@@ -83,6 +83,7 @@ public class ObjectTest extends AndroidTestCase {
 
     public void putObjectACLTest() throws CosXmlServiceException, CosXmlClientException {
         PutObjectACLRequest request = new PutObjectACLRequest(bucket, cosPath);
+        request.setSign(600);
         request.setXCOSACL(COSACL.PUBLIC_READ_WRITE);
         ACLAccount aclAccount = new ACLAccount("1278687956", "1278687956");
         ACLAccounts aclAccounts = new ACLAccounts();
@@ -98,6 +99,7 @@ public class ObjectTest extends AndroidTestCase {
 
     public void getObjectACLTest() throws CosXmlServiceException, CosXmlClientException {
         GetObjectACLRequest request = new GetObjectACLRequest(bucket, cosPath);
+        request.setSign(600);
         GetObjectACLResult result = QBaseServe.cosXmlClient.getObjectACL(request);
         Log.d(TAG, result.printHeaders() + "|" + result.printBody());
     }
@@ -105,6 +107,7 @@ public class ObjectTest extends AndroidTestCase {
     public void getObjectTest() throws CosXmlServiceException, CosXmlClientException {
         String localPath = getContext().getExternalCacheDir().getPath();
         GetObjectRequest request = new GetObjectRequest(bucket, cosPath, localPath);
+        request.setSign(600);
         GetObjectResult result = QBaseServe.cosXmlClient.getObject(request);
         Log.d(TAG, result.printHeaders() + "|" + result.printBody());
 
@@ -125,6 +128,7 @@ public class ObjectTest extends AndroidTestCase {
         String copyPath = "copy_"+ cosPath;
         CopyObjectRequest request = new CopyObjectRequest(bucket,
                 copyPath, copySourceStruct);
+        request.setSign(600);
         CopyObjectResult result = QBaseServe.cosXmlClient.copyObject(request);
         Log.d(TAG, result.printHeaders() + "|" + result.printBody());
         QBaseServe.delete(bucket, copyPath);
@@ -132,12 +136,14 @@ public class ObjectTest extends AndroidTestCase {
 
     public void deleteObjectTest() throws CosXmlServiceException, CosXmlClientException {
         DeleteObjectRequest request = new DeleteObjectRequest(bucket, cosPath);
+        request.setSign(600);
         DeleteObjectResult result = QBaseServe.cosXmlClient.deleteObject(request);
         Log.d(TAG, result.printHeaders() + "|" + result.printBody());
     }
 
     public void deleteMulitObjectTest() throws CosXmlServiceException, CosXmlClientException {
         DeleteMultiObjectRequest request = new DeleteMultiObjectRequest(bucket, null);
+        request.setSign(600);
         request.setQuiet(true);
         request.setObjectList(cosPath);
         request.setSign(600,null,null);
@@ -148,6 +154,7 @@ public class ObjectTest extends AndroidTestCase {
         String srcPath = QBaseServe.createFile(1024 * 1024);
         long position = 0;
         AppendObjectRequest request = new AppendObjectRequest(bucket, cosPath, srcPath, position);
+        request.setSign(600);
         AppendObjectResult result = QBaseServe.cosXmlClient.appendObject(request);
         Log.d(TAG, result.printHeaders() + "|" + result.printBody());
         QBaseServe.delete(bucket, cosPath);
@@ -158,6 +165,7 @@ public class ObjectTest extends AndroidTestCase {
     public void multiUploadObjectTest() throws CosXmlServiceException, CosXmlClientException, IOException {
         String srcPath = QBaseServe.createFile(1024* 1024);
         InitMultipartUploadRequest request = new InitMultipartUploadRequest(bucket, cosPath);
+        request.setSign(600);
         InitMultipartUploadResult result = QBaseServe.cosXmlClient.initMultipartUpload(request);
         Log.d(TAG, result.printHeaders() + "|" + result.printBody());
 
@@ -165,18 +173,21 @@ public class ObjectTest extends AndroidTestCase {
         int partNumber = 1;
         UploadPartRequest request1 = new UploadPartRequest(bucket, cosPath, partNumber, srcPath,
                 uploadId);
+        request1.setSign(600);
         UploadPartResult result1 = QBaseServe.cosXmlClient.uploadPart(request1);
         Log.d(TAG, result1.printHeaders() + "|" + result1.printBody());
-
-        ListPartsRequest request2 = new ListPartsRequest(bucket, cosPath, uploadId);
-        ListPartsResult result2 = QBaseServe.cosXmlClient.listParts(request2);
-        Log.d(TAG, result2.printHeaders() + "|" + result2.printBody());
+//
+//        ListPartsRequest request2 = new ListPartsRequest(bucket, cosPath, uploadId);
+//        request2.setSign(600);
+//        ListPartsResult result2 = QBaseServe.cosXmlClient.listParts(request2);
+//        Log.d(TAG, result2.printHeaders() + "|" + result2.printBody());
 
         String etag = result1.getETag();
         Map<Integer, String> partNumberAndPart = new HashMap<>();
         partNumberAndPart.put(partNumber, etag);
         CompleteMultiUploadRequest request3 = new CompleteMultiUploadRequest(bucket, cosPath, uploadId,
                 partNumberAndPart);
+        request3.setSign(600);
         CompleteMultiUploadResult result3 = QBaseServe.cosXmlClient.completeMultiUpload(request3);
         Log.d(TAG, result3.printHeaders() + "|" + result3.printBody());
 
@@ -188,6 +199,7 @@ public class ObjectTest extends AndroidTestCase {
     public void abortMultiUploadTest() throws CosXmlServiceException, CosXmlClientException, IOException {
         String srcPath = QBaseServe.createFile(1024* 1024);
         InitMultipartUploadRequest request = new InitMultipartUploadRequest(bucket, cosPath);
+        request.setSign(600);
         InitMultipartUploadResult result = QBaseServe.cosXmlClient.initMultipartUpload(request);
         Log.d(TAG, result.printHeaders() + "|" + result.printBody());
 
@@ -195,14 +207,17 @@ public class ObjectTest extends AndroidTestCase {
         int partNumber = 1;
         UploadPartRequest request1 = new UploadPartRequest(bucket, cosPath, partNumber, srcPath,
                 uploadId);
+        request1.setSign(600);
         UploadPartResult result1 = QBaseServe.cosXmlClient.uploadPart(request1);
         Log.d(TAG, result1.printHeaders() + "|" + result1.printBody());
 
-        ListPartsRequest request2 = new ListPartsRequest(bucket, cosPath, uploadId);
-        ListPartsResult result2 = QBaseServe.cosXmlClient.listParts(request2);
-        Log.d(TAG, result2.printHeaders() + "|" + result2.printBody());
+//        ListPartsRequest request2 = new ListPartsRequest(bucket, cosPath, uploadId);
+//        request2.setSign(600);
+//        ListPartsResult result2 = QBaseServe.cosXmlClient.listParts(request2);
+//        Log.d(TAG, result2.printHeaders() + "|" + result2.printBody());
 
         AbortMultiUploadRequest request3 = new AbortMultiUploadRequest(bucket, cosPath, uploadId);
+        request3.setSign(600);
         AbortMultiUploadResult result3 = QBaseServe.cosXmlClient.abortMultiUpload(request3);
         Log.d(TAG, result3.printHeaders() + "|" + result3.printBody());
     }
@@ -217,7 +232,7 @@ public class ObjectTest extends AndroidTestCase {
         headObjectTest();
 //        optionObjectTest();
         putObjectACLTest();
-//        getObjectACLTest();
+  //      getObjectACLTest();
         getObjectTest();
         deleteObjectTest();
         deleteMulitObjectTest();

@@ -54,6 +54,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
         cosPath = "putobject.txt";
         String srcPath = QBaseServe.createFile(1024 * 1024);
         PutObjectRequest request = new PutObjectRequest(bucket, cosPath, srcPath);
+        request.setSign(600);
         QBaseServe.cosXmlClient.putObjectAsync(request, new CosXmlResultListener() {
 
             @Override
@@ -77,6 +78,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
 
     public void headObjectTest() throws InterruptedException {
         HeadObjectRequest request = new HeadObjectRequest(bucket, cosPath);
+        request.setSign(600);
         QBaseServe.cosXmlClient.headObjectAsync(request, new CosXmlResultListener() {
             @Override
             public void onSuccess(CosXmlRequest request, CosXmlResult result) {
@@ -100,6 +102,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
         String origin = "http://cloud.tencent.com";
         String method = "PUT";
         OptionObjectRequest request = new OptionObjectRequest(bucket, cosPath, origin, method);
+        request.setSign(600);
         QBaseServe.cosXmlClient.optionObjectAsync(request, new CosXmlResultListener() {
             @Override
             public void onSuccess(CosXmlRequest request, CosXmlResult result) {
@@ -121,6 +124,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
 
     public void putObjectACLTest() throws InterruptedException {
         PutObjectACLRequest request = new PutObjectACLRequest(bucket, cosPath);
+        request.setSign(600);
         request.setXCOSACL(COSACL.PUBLIC_READ_WRITE);
         ACLAccount aclAccount = new ACLAccount("1278687956", "1278687956");
         ACLAccounts aclAccounts = new ACLAccounts();
@@ -145,6 +149,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
 
     public void getObjectACLTest() throws InterruptedException {
         GetObjectACLRequest request = new GetObjectACLRequest(bucket, cosPath);
+        request.setSign(600);
         QBaseServe.cosXmlClient.getObjectACLAsync(request, new CosXmlResultListener() {
             @Override
             public void onSuccess(CosXmlRequest request, CosXmlResult result) {
@@ -166,6 +171,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
     public void getObjectTest() throws InterruptedException {
         final String localPath = Environment.getExternalStorageDirectory().getPath();
         GetObjectRequest request = new GetObjectRequest(bucket, cosPath, localPath);
+        request.setSign(600);
         QBaseServe.cosXmlClient.getObjectAsync(request, new CosXmlResultListener() {
             @Override
             public void onSuccess(CosXmlRequest request, CosXmlResult result) {
@@ -200,6 +206,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
 
         CopyObjectRequest request2 = new CopyObjectRequest(bucket,
                 copyPath, copySourceStruct);
+        request2.setSign(600);
         QBaseServe.cosXmlClient.copyObjectAsync(request2,  new CosXmlResultListener() {
             @Override
             public void onSuccess(CosXmlRequest request, CosXmlResult result) {
@@ -229,6 +236,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
 
     public void deleteObjectTest() throws InterruptedException {
         DeleteObjectRequest request = new DeleteObjectRequest(bucket, cosPath);
+        request.setSign(600);
         QBaseServe.cosXmlClient.deleteObjectAsync(request, new CosXmlResultListener() {
 
             @Override
@@ -284,6 +292,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
         cosPath = "append.txt";
         long position = 0;
         AppendObjectRequest request = new AppendObjectRequest(bucket, cosPath, srcPath, position);
+        request.setSign(600);
         QBaseServe.cosXmlClient.appendObjectAsync(request, new CosXmlResultListener() {
             @Override
             public void onSuccess(CosXmlRequest request, CosXmlResult result) {
@@ -404,6 +413,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
         isOver = 0;
         CompleteMultiUploadRequest request = new CompleteMultiUploadRequest(bucket, cosPath, uploadId,
                 partNumberAndEtag);
+        request.setSign(600);
         QBaseServe.cosXmlClient.completeMultiUploadAsync(request, new CosXmlResultListener() {
             @Override
             public void onSuccess(CosXmlRequest request, CosXmlResult result) {
@@ -450,7 +460,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
     public void abortMultiUploadPartObjectTest() throws Exception {
         String uploadId = initMulitupload();
         String eTag = uploadPartTest(1, uploadId);
-        listUploadPartTest(uploadId);
+        //listUploadPartTest(uploadId);
         abortMultiuploadTest(uploadId);
     }
 
@@ -463,7 +473,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
         headObjectTest();
         optionObjectTest();
         putObjectACLTest();
-        //getObjectACLTest();
+    //    getObjectACLTest();
         getObjectTest();
         deleteObjectTest();
         deleteMulitObjectTest();

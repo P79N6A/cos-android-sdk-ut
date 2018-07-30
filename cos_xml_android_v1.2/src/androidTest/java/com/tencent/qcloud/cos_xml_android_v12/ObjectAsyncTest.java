@@ -460,7 +460,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
     public void abortMultiUploadPartObjectTest() throws Exception {
         String uploadId = initMulitupload();
         String eTag = uploadPartTest(1, uploadId);
-        listUploadPartTest(uploadId);
+        //listUploadPartTest(uploadId);
         abortMultiuploadTest(uploadId);
     }
 

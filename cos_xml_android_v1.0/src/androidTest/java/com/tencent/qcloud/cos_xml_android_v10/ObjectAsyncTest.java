@@ -411,7 +411,7 @@ public class ObjectAsyncTest extends AndroidTestCase {
     public void abortMulti() throws Exception {
         String uploadId = initMulitupload();
         String eTag = uploadPartTest(uploadId);
-        listUploadPartTest(uploadId);
+        //listUploadPartTest(uploadId);
         abortMultiuploadTest(uploadId);
     }
 

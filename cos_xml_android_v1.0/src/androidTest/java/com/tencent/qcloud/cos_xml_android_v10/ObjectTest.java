@@ -203,13 +203,13 @@ public class ObjectTest extends AndroidTestCase {
         UploadPartResult result1 = QBaseServe.cosXmlClient.uploadPart(request1);
         Log.d(TAG, result1.printHeaders() + "|" + result1.printBody());
 
-        ListPartsRequest request2 = new ListPartsRequest();
-        request2.setBucket(bucket);
-        request2.setCosPath(cosPath);
-        request2.setUploadId(uploadId);
-        request2.setSign(600, null, null);
-        ListPartsResult result2 = QBaseServe.cosXmlClient.listParts(request2);
-        Log.d(TAG, result2.printHeaders() + "|" + result2.printBody());
+//        ListPartsRequest request2 = new ListPartsRequest();
+//        request2.setBucket(bucket);
+//        request2.setCosPath(cosPath);
+//        request2.setUploadId(uploadId);
+//        request2.setSign(600, null, null);
+//        ListPartsResult result2 = QBaseServe.cosXmlClient.listParts(request2);
+//        Log.d(TAG, result2.printHeaders() + "|" + result2.printBody());
 
         String etag = result1.getETag();
         Map<Integer, String> partNumberAndPart = new HashMap<>();
@@ -248,13 +248,13 @@ public class ObjectTest extends AndroidTestCase {
         UploadPartResult result1 = QBaseServe.cosXmlClient.uploadPart(request1);
         Log.d(TAG, result1.printHeaders() + "|" + result1.printBody());
 
-        ListPartsRequest request2 = new ListPartsRequest();
-        request2.setBucket(bucket);
-        request2.setCosPath(cosPath);
-        request2.setUploadId(uploadId);
-        request2.setSign(600, null, null);
-        ListPartsResult result2 = QBaseServe.cosXmlClient.listParts(request2);
-        Log.d(TAG, result2.printHeaders() + "|" + result2.printBody());
+//        ListPartsRequest request2 = new ListPartsRequest();
+//        request2.setBucket(bucket);
+//        request2.setCosPath(cosPath);
+//        request2.setUploadId(uploadId);
+//        request2.setSign(600, null, null);
+//        ListPartsResult result2 = QBaseServe.cosXmlClient.listParts(request2);
+//        Log.d(TAG, result2.printHeaders() + "|" + result2.printBody());
 
         AbortMultiUploadRequest request3 = new AbortMultiUploadRequest();
         request3.setBucket(bucket);
