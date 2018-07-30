@@ -530,16 +530,16 @@ public class V4UnitTest extends AndroidTestCase {
 
     @Test
     public void test() throws Exception {
-        createDir();
-        removeEmptyDir();
+//        createDir();
+//        removeEmptyDir();
         listDir();
-        uploadSample();
-        updateObject();
-        getObjectMeta();
-        moveObject();
-        copyObject();
-        getObject();
-        deleteObject();
-        uploadLarge();
+//        uploadSample();
+//        updateObject();
+//        getObjectMeta();
+//        moveObject();
+//        copyObject();
+//        getObject();
+//        deleteObject();
+//        uploadLarge();
     }
 }
